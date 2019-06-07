@@ -1,0 +1,117 @@
+---
+title: "Advanced Bioinformatics 2019 assessment"
+author: "1806284"
+date: "09/05/2019"
+output:
+  html_document:
+    keep_md: yes
+---
+
+
+"Task 1"
+```{r}
+sum(5:55)
+```
+
+
+
+
+"Task 2"
+```{r}
+sumfun <- function(n){
+  return(sum(5:n))
+}
+
+sumfun(10)
+sumfun(20)
+sumfun(100)
+```
+
+
+
+
+"Task 3"
+```{r}
+vector<-c()
+vector[1:2]=1
+for (i in 3:12){
+  vector[i]=vector[i-1]+vector[i-2]
+}
+ 
+vector 
+```
+
+
+
+
+"Task 4"
+```{r}
+data(mtcars)
+library(ggplot2)
+
+ggplot(mtcars, aes(x=factor(gear),y=mpg,fill=factor(gear)))+
+  geom_boxplot(notch=F) +scale_x_discrete("Gear")+
+  scale_y_continuous("Miles per Gallon")+ggtitle("MPG by Gears")
+```
+
+
+
+
+
+"Task 5"
+```{r}
+data(cars)
+lmodel <- lm(dist ~ speed, data = cars)
+
+slope <- lmodel$coefficients[2]
+slope[[1]]
+intercept <- lmodel$coefficients[1]
+intercept[[1]]
+
+sd_slope <- summary(lmodel)$coefficients[2,2]
+sd_slope
+sd_intercept <- summary(lmodel)$coefficients[1,2]
+sd_intercept
+```
+
+
+
+
+
+"Task 6"
+```{r}
+ggplot(cars, aes(x=speed, y=dist)) + geom_point() + labs(y="Breaking Distance [feet]", x="Speed [mph]") +
+  geom_smooth(method="lm", se=F)
+  #geom_abline(intercept = 8.28, slope=0.16)
+
+```
+
+
+
+
+
+"Task 7"
+```{r}
+
+speed_t <- cars$speed * (5280/3600)
+
+lmodel_2 <- lm(dist ~ 0 + speed_t + I(speed_t^2), cars)
+summary(lmodel_2)
+
+# The average value is 0.84479 seconds, which seems a reasonable time
+
+x <- cars$spped_t
+y <- cars$dist
+
+ggplot(cars,aes(speed_t, dist)) +
+  geom_point()+
+  geom_smooth(method="lm", formula = "y~0+x+I(x^2)")+
+  labs(title="Average reaction time", x="Speed [feets/s]", y="Breaking distance [feet]")
+
+```
+
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
